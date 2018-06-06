@@ -112,7 +112,6 @@ export default {
         .then(function(data){
           that.fromCountryName = data.results[0].address_components[0].long_name
           that.fromCountryCode = data.results[0].address_components[0].short_name
-          console.log(that.fromCountryCode)
           that.coordToCountry()
         })      
     },
@@ -131,7 +130,6 @@ export default {
       .then((resp) => resp.json())
       .then(function(data){
         that.fromCountryCurrency = data.results[that.fromCountryCode].currencyId
-        console.log(that.toCountryCurrency)
         that.countryToRate()
       })
     },
@@ -141,12 +139,11 @@ export default {
       let to = that.toCountryCurrency
       let convert = "https://www.currencyconverterapi.com/api/v5/convert?q="+to+"_"+from+"&compact=ultra&apiKey=d996c6d6-ec4a-46d0-ad17-f9eba3092eb9"
 
-      console.log(convert)
       fetch(convert)
         .then((resp) => resp.json())
         .then(function(data){
           that.rate = data[to+"_"+from]
-          console.log("loaded rate " + that.rate)
+          // console.log("loaded rate " + that.rate)
           // that.fromValue = that.rate
           that.popFromValue()
         })
